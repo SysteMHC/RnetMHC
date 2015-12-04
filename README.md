@@ -5,7 +5,7 @@
 
 Overwiev
 
-- visualization and transformation of numeric dataframes and matrices
+filter and visualize netmhc output
 
 
 ## How to install:
