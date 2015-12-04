@@ -1,0 +1,10 @@
+Package: RnetMHC
+Type: Package
+Title: Pars, Filter and Visualize netMHC output
+Version: 0.1
+Date: 2015-12-04
+Author: Lucia Espona, Witold Wolski
+Maintainer: Witold Wolski <wewolski@gmail.com>
+Description: Pars, Filter and Visualize netMHC output
+License: LGPL
+LazyData: TRUE
