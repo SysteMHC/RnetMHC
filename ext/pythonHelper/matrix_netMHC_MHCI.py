@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+##/home/witold/prog/SysteMHC_Binaries/netMHC/netMHC-3.4/netMHC -a Mamu-A02 -l 10 current_prot_LLDSGLPSLL_1449566992.tmp
+
 import sys
 import os
 import shutil
@@ -17,14 +19,41 @@ OPTIONAL_COLUMNS = ["Peptide_mod_ion"]
 MIN_PEP_LENGTH = 8
 MAX_PEP_LENGTH = 12
 
-ALLELES_LIST_AVAIL = ['A0201', 'A0101', 'A0301', 'A1101', 'A2301', 'A2402', 'A2501', 'A2601', 'A2902', 'A3001', 
-                'A3101', 'A3201', 'A3301', 'A6801', 'B0702', 'B0801', 'B1402', 'B2705', 'B3501', 'B3801',
-                'B3901', 'B4002', 'B4402', 'B4501', 'B5101', 'B5701', 'C0701',
-                'H2Db', 'H2Dd', 'H2Kb', 'H2Kd', 'H2Kk', 'H2Ld']
+ALLELES_LIST_AVAIL=['BoLA-D18.4', 'H-2-Kk_8mer', 'HLA-A02:17_10mer', 'HLA-A30:01', 'HLA-B07:02_8mer', 'HLA-B35:01_10mer',
+                    'HLA-B54:01', 'Mamu-A01_8mer', 'Mamu-B08', 'Patr-A0401_10mer']
+#A02,B07,C07
+
+#BoLA-HD6      H-2-Ld            HLA-A02:19        HLA-A30:01_10mer  HLA-B08:01        HLA-B35:03        HLA-B54:01_10mer  Mamu-A02          Mamu-B08_10mer    Patr-A0701
+#BoLA-JSP.1    HLA-A01:01        HLA-A02:50        HLA-A30:02        HLA-B08:01_10mer  HLA-B38:01        HLA-B57:01        Mamu-A02_10mer    Mamu-B08_11mer    Patr-A0701_10mer
+#BoLA-T2a      HLA-A01:01_10mer  HLA-A03:01        HLA-A30:02_10mer  HLA-B08:01_8mer   HLA-B39:01        HLA-B57:01_10mer  Mamu-A02_11mer    Mamu-B08_8mer     Patr-A0901
+#BoLA-T2b      HLA-A02:01        HLA-A03:01_10mer  HLA-A30:02_11mer  HLA-B08:02        HLA-B40:01        HLA-B57:01_11mer  Mamu-A02_8mer     Mamu-B1001        Patr-A0901_10mer
+#BoLA-T2C      HLA-A02:01_10mer  HLA-A03:01_11mer  HLA-A31:01        HLA-B08:03        HLA-B40:01_10mer  HLA-B58:01        Mamu-A07          Mamu-B17          Patr-A0901_11mer
+#H-2-Db        HLA-A02:01_11mer  HLA-A11:01        HLA-A31:01_10mer  HLA-B14:02        HLA-B40:02        HLA-B58:01_10mer  Mamu-A07_10mer    Mamu-B17_10mer    Patr-B0101
+#H-2-Db_10mer  HLA-A02:01_8mer   HLA-A11:01_10mer  HLA-A32:01        HLA-B15:01        HLA-B40:02_10mer  HLA-B73:01        Mamu-A07_11mer    Mamu-B17_11mer    Patr-B0101_10mer
+#H-2-Db_11mer  HLA-A02:02        HLA-A11:01_11mer  HLA-A32:01_10mer  HLA-B15:01_10mer  HLA-B40:13        HLA-B83:01        Mamu-A07_8mer     Mamu-B3901        Patr-B0101_11mer
+#H-2-Db_8mer   HLA-A02:02_10mer  HLA-A23:01        HLA-A32:07        HLA-B15:02        HLA-B42:01        HLA-C03:03        Mamu-A11          Mamu-B3901_8mer   Patr-B1301
+#H-2-Dd        HLA-A02:02_11mer  HLA-A23:01_10mer  HLA-A32:15        HLA-B15:03        HLA-B42:01_10mer  HLA-C04:01        Mamu-A11_10mer    Mamu-B52          Patr-B1301_10mer
+#H-2-Dd_10mer  HLA-A02:02_8mer   HLA-A24:02        HLA-A33:01        HLA-B15:09        HLA-B44:02        HLA-C05:01        Mamu-A11_11mer    Mamu-B52_10mer    Patr-B2401
+#H-2-Kb        HLA-A02:03        HLA-A24:02_10mer  HLA-A33:01_10mer  HLA-B15:17        HLA-B44:02_10mer  HLA-C06:02        Mamu-A11_8mer     Mamu-B52_11mer    Patr-B2401_10mer
+#H-2-Kb_10mer  HLA-A02:03_10mer  HLA-A24:02_8mer   HLA-A66:01        HLA-B18:01        HLA-B44:03        HLA-C07:01        Mamu-A20102       Mamu-B52_8mer     SLA-10401
+#H-2-Kb_11mer  HLA-A02:03_11mer  HLA-A24:03        HLA-A68:01        HLA-B18:01_10mer  HLA-B44:03_10mer  HLA-C07:02        Mamu-A2201        Mamu-B6601        SLA-20401
+#H-2-Kb_8mer   HLA-A02:03_8mer   HLA-A25:01        HLA-A68:01_10mer  HLA-B18:01_11mer  HLA-B45:01        HLA-C08:02        Mamu-A2201_10mer  Mamu-B8301        SLA-30401
+#H-2-Kd        HLA-A02:06        HLA-A26:01        HLA-A68:02        HLA-B18:01_8mer   HLA-B45:01_10mer  HLA-C12:03        Mamu-A2601        Mamu-B8301_10mer
+#H-2-Kd_10mer  HLA-A02:06_10mer  HLA-A26:01_10mer  HLA-A68:02_10mer  HLA-B27:05        HLA-B46:01        HLA-C14:02        Mamu-A70103       Mamu-B8701
+#H-2-Kd_11mer  HLA-A02:06_11mer  HLA-A26:02        HLA-A68:23        HLA-B27:05_10mer  HLA-B48:01        HLA-C15:02        Mamu-B01          Patr-A0101
+#H-2-Kd_8mer   HLA-A02:11        HLA-A26:03        HLA-A69:01        HLA-B27:05_11mer  HLA-B51:01        HLA-E01:01        Mamu-B03          Patr-A0101_10mer
+#H-2-Kk        HLA-A02:12        HLA-A29:02        HLA-A80:01        HLA-B27:05_8mer   HLA-B51:01_10mer  Mamu-A01          Mamu-B03_10mer    Patr-A0301
+#H-2-Kk_10mer  HLA-A02:16        HLA-A29:02_10mer  HLA-B07:02        HLA-B27:20        HLA-B53:01        Mamu-A01_10mer    Mamu-B03_11mer    Patr-A0301_10mer
+#H-2-Kk_11mer  HLA-A02:17        HLA-A29:02_11mer  HLA-B07:02_10mer  HLA-B35:01        HLA-B53:01_10mer  Mamu-A01_11mer    Mamu-B03_8mer     Patr-A0401
+
+#ALLELES_LIST_AVAIL = ['A0201', 'A0101', 'A0301', 'A1101', 'A2301', 'A2402', 'A2501', 'A2601', 'A2902', 'A3001',
+#                'A3101', 'A3201', 'A3301', 'A6801', 'B0702', 'B0801', 'B1402', 'B2705', 'B3501', 'B3801',
+#                'B3901', 'B4002', 'B4402', 'B4501', 'B5101', 'B5701', 'C0701',
+#                'H2Db', 'H2Dd', 'H2Kb', 'H2Kd', 'H2Kk', 'H2Ld']
 
 AMINOACIDS = ['A', 'R', 'N', 'D', 'C', 'E', 'Q', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V']
 
-NETMHC_PATH = "netMHC-3.4_fix" #/IMSB/ra/lespona/html/bin/mhc_i/method/netMHC-3.4/netMHC-3.4_fix
+NETMHC_PATH = "/home/witold/prog/SysteMHC_Binaries/netMHC/netMHC-3.4/netMHC" #/IMSB/ra/lespona/html/bin/mhc_i/method/netMHC-3.4/netMHC-3.4_fix
 
 NETMHC_HEADER = ['pos', 'peptide', 'score/logscore', 'affinity(nM)', 'Bind Level', 'Protein Name', 'Allele', 'Method','SB Threshold', 'WB Threshold']
 
@@ -125,7 +154,7 @@ def run_generic_tool(tool, in_, args=[], log=".log", log_dir="",
         # need to include output filename so multiple tools running in
         # parallel produce different logfiles:
         log = tool_name + "_" + os.path.splitext(os.path.basename(in_))[0] + log
-    
+
     cmd_line = shlex.split(command)
     process = subprocess.Popen(cmd_line, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output = process.communicate()

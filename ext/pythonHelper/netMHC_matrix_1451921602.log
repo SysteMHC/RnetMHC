@@ -1,0 +1,14 @@
+Monday January  4 2016 16:33
+
+
+NetMHC version 3.4. 10mer predictions using Artificial Neural Networks - Approximation. Allele BoLA-D18.4. 
+Strong binder threshold  50 nM. Weak binder threshold score 500 nM
+
+
+
+----------------------------------------------------------------------------------------------------
+ pos    peptide      logscore affinity(nM) Bind Level    Protein Name     Allele
+----------------------------------------------------------------------------------------------------
+   0 LLDSGLPSLL         0.067        24122            Prot_LLDSGLPSLL_BoLA-D18.4 BoLA-D18.4
+--------------------------------------------------------------------------------------------------
+
